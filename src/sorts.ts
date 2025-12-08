@@ -1,7 +1,7 @@
 export async function bubbleSort(
   array: number[],
   onUpdate: () => void,
-  delay: number = 50
+  delay: number = 20
 ): Promise<void> {
   const n = array.length;
   for (let i = 0; i < n - 1; i++) {
