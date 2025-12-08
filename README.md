@@ -2,6 +2,8 @@
 
 A web application that visualizes sorting algorithms using animated vertical bars.
 
+![sortviz](./resources/sortviz.gif)
+
 ## Features
 
 - Generate random arrays displayed as bars
@@ -17,24 +19,28 @@ A web application that visualizes sorting algorithms using animated vertical bar
 
 Clone the repository:
 
+```
 git clone git@github.com:hwang-fu/sortviz.git
 cd sortviz
 
 Install dependencies:
 
 bun install
+```
 
 ## Usage
 
 Start the development server:
 
+```
 bun src/index.html
+```
 
-Open the URL shown in your terminal (usually http://localhost:5420).
+Open the URL shown in your terminal (usually http://localhost:3000).
 
 Click "Generate Array" to create a new random array, then click "Sort" to watch the sorting animation.
 
-## Tech Stack
+## Tech Stack By Far
 
 - Bun
 - TypeScript
