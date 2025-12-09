@@ -4,6 +4,7 @@ import {
   insertionSort,
   quickSort,
   mergeSort,
+  heapSort,
 } from './sorts';
 
 const visualizer = document.getElementById("visualizer")!;
@@ -54,6 +55,8 @@ sortBtn.addEventListener("click", async () => {
     await quickSort(array, renderBars);
   } else if (sort === 'merge') {
     await mergeSort(array, renderBars);
+  } else if (sort === 'heap') {
+    await heapSort(array, renderBars);
   } else {
     await bubbleSort(array, renderBars);
   }

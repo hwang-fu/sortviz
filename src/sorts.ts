@@ -148,3 +148,43 @@ export async function mergeSort(
 
   await sort(0, array.length - 1);
 }
+
+export async function heapSort(
+  array: number[],
+  onUpdate: () => void,
+  delay: number = 20
+): Promise<void> {
+  const n = array.length;
+
+  const heapify = async (size: number, rootIndex: number) => {
+    let maxIndex = rootIndex;
+    const leftChildIndex = 2 * rootIndex + 1;
+    const rightChildIndex = 2 * rootIndex + 2;
+
+    if (leftChildIndex < size && array[leftChildIndex]! > array[maxIndex]!) {
+      maxIndex = leftChildIndex;
+    }
+    if (rightChildIndex < size && array[rightChildIndex]! > array[maxIndex]!) {
+      maxIndex = rightChildIndex;
+    }
+    if (maxIndex !== rootIndex) {
+      [array[rootIndex]!, array[maxIndex]!] = [array[maxIndex]!, array[rootIndex]!];
+      onUpdate();
+      await new Promise((resolve, _reject) => setTimeout(resolve, delay));
+      await heapify(size, maxIndex);
+    }
+  };
+
+  // build max heap:
+  for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
+    await heapify(n, i);
+  }
+
+  // extract elements from the heap:
+  for (let i = n - 1; i > 0; i--) {
+    [array[0]!, array[i]!] = [array[i]!, array[0]!];
+    onUpdate();
+    await new Promise((resolve, _reject) => setTimeout(resolve, delay));
+    await heapify(i, 0);
+  }
+}
