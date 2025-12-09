@@ -94,3 +94,57 @@ export async function quickSort(
 
   await qsort(0, array.length - 1);
 }
+
+export async function mergeSort(
+  array: number[],
+  onUpdate: () => void,
+  delay: number = 20
+): Promise<void> {
+  const merge = async (leftIndex: number, middleindex: number, rightIndex: number) => {
+    const left = array.slice(leftIndex, middleindex + 1);
+    const right = array.slice(middleindex + 1, rightIndex + 1);
+    let i = 0;
+    let j = 0;
+    let k = leftIndex;
+
+    while (i < left.length && j < right.length) {
+      if (left[i]! <= right[j]!) {
+        array[k] = left[i]!;
+        i++;
+      } else {
+        array[k] = right[j]!;
+        j++;
+      }
+      k++;
+      onUpdate();
+      await new Promise((resolve, _reject) => setTimeout(resolve, delay));
+    }
+
+    while (i < left.length) {
+      array[k] = left[i]!;
+      i++;
+      k++;
+      onUpdate();
+      await new Promise((resolve, _reject) => setTimeout(resolve, delay));
+    }
+
+    while (j < right.length) {
+      array[k] = right[j]!;
+      j++;
+      k++;
+      onUpdate();
+      await new Promise((resolve, _reject) => setTimeout(resolve, delay));
+    }
+  };
+
+  const sort = async (leftIndex: number, rightIndex: number) => {
+    if (leftIndex < rightIndex) {
+      const mid = Math.floor((leftIndex + rightIndex) / 2);
+      await sort(leftIndex, mid);
+      await sort(mid + 1, rightIndex);
+      await merge(leftIndex, mid, rightIndex);
+    }
+  };
+
+  await sort(0, array.length - 1);
+}
