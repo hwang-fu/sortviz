@@ -3,6 +3,7 @@ import {
   selectionSort,
   insertionSort,
   quickSort,
+  mergeSort,
 } from './sorts';
 
 const visualizer = document.getElementById("visualizer")!;
@@ -51,6 +52,8 @@ sortBtn.addEventListener("click", async () => {
     await insertionSort(array, renderBars);
   } else if (sort === 'quick') {
     await quickSort(array, renderBars);
+  } else if (sort === 'merge') {
+    await mergeSort(array, renderBars);
   } else {
     await bubbleSort(array, renderBars);
   }
