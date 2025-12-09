@@ -11,7 +11,9 @@ export async function bubbleSort(
       }
       [array[j]!, array[j+1]!] = [array[j+1]!, array[j]!];
       onUpdate();
-      await new Promise(r => setTimeout(r, delay));
+      await new Promise(
+        (resolve, _reject) => setTimeout(resolve, delay)
+      );
     }
   }
 }
@@ -32,7 +34,9 @@ export async function selectionSort(
     if (minIdex !== i) {
       [array[i]!, array[minIdex]!] = [array[minIdex]!, array[i]!];
       onUpdate();
-      await new Promise(r => setTimeout(r, delay));
+      await new Promise(
+        (resolve, _reject) => setTimeout(resolve, delay)
+      );
     }
   }
 }
