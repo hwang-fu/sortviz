@@ -1,8 +1,9 @@
-import { bubbleSort } from './sorts';
+import { bubbleSort, selectionSort } from './sorts';
 
 const visualizer = document.getElementById("visualizer")!;
 const generateBtn = document.getElementById("generate")!;
 const sortBtn = document.getElementById("sort")!;
+const algorithm = document.getElementById('algorithm') as HTMLSelectElement;
 
 let array: number[] = [];
 let isSorting = false;
@@ -36,7 +37,14 @@ sortBtn.addEventListener("click", async () => {
     return;
   }
   isSorting = true;
-  await bubbleSort(array, renderBars);
+  const sort = algorithm.value;
+  if (sort === 'bubble') {
+    await bubbleSort(array, renderBars);
+  } else if (sort === 'selection') {
+    await selectionSort(array, renderBars);
+  } else {
+    await bubbleSort(array, renderBars);
+  }
   isSorting = false;
 });
 
