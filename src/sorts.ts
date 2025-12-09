@@ -15,3 +15,24 @@ export async function bubbleSort(
     }
   }
 }
+
+export async function selectionSort(
+  array: number[],
+  onUpdate: () => void,
+  delay: number = 20
+): Promise<void> {
+  const n = array.length;
+  for (let i = 0; i < n - 1; i++) {
+    let minIdex = i;
+    for (let j = i + 1; j < n; j++) {
+      if (array[j]! < array[minIdex]!) {
+        minIdex = j;
+      }
+    }
+    if (minIdex !== i) {
+      [array[i]!, array[minIdex]!] = [array[minIdex]!, array[i]!];
+      onUpdate();
+      await new Promise(r => setTimeout(r, delay));
+    }
+  }
+}
