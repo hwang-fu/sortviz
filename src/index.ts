@@ -1,4 +1,4 @@
-import { bubbleSort, selectionSort } from './sorts';
+import { bubbleSort, selectionSort, insertionSort } from './sorts';
 
 const visualizer = document.getElementById("visualizer")!;
 const generateBtn = document.getElementById("generate")!;
@@ -42,6 +42,8 @@ sortBtn.addEventListener("click", async () => {
     await bubbleSort(array, renderBars);
   } else if (sort === 'selection') {
     await selectionSort(array, renderBars);
+  } else if (sort === 'insertion') {
+    await insertionSort(array, renderBars);
   } else {
     await bubbleSort(array, renderBars);
   }

@@ -40,3 +40,24 @@ export async function selectionSort(
     }
   }
 }
+
+export async function insertionSort(
+  array: number[],
+  onUpdate: () => void,
+  delay: number = 20
+): Promise<void> {
+  const n = array.length;
+  for (let i = 1; i < n; i++) {
+    const key = array[i]!;
+    let j = i - 1;
+    while (j > 0 && array[j]! > key) {
+      array[j + 1] = array[j]!;
+      j--;
+      onUpdate();
+      await new Promise(
+        (resolve, _reject) => setTimeout(resolve, delay)
+      );
+    }
+    array[j + 1] = key;
+  }
+}
